@@ -135,6 +135,7 @@ def AssetCreateView(request,*args,**kwargs):
             profile=form.save(commit=False)
             profile.requester=request.user
             if profile.time<timezone.now():
+                print("Expired")
                 profile.status='EXPIRED'
             profile.save(*args,**kwargs)             
             
