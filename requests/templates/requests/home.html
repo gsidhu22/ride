@@ -1,0 +1,37 @@
+{% extends 'users/base.html' %}
+{% load render_table from django_tables2%}
+{% load crispy_forms_tags%}
+
+{% block content %}    
+    {% if user.is_authenticated %}    
+        <h3>My Asset Transport Requests</h3>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filters
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'request-filter' 'EXPIRED' %}">Expired Requests  </a>
+                <a class="dropdown-item" href="{% url 'request-filter' 'PENDING' %}">Pending Requests  </a>
+                <a class="dropdown-item" href="{% url 'request-filter' 'LAPTOP' %}">Laptop Carry Requests  </a>
+                <a class="dropdown-item" href="{% url 'request-filter' 'PACKAGE' %}">Package Carry Requests  </a>
+                <a class="dropdown-item" href="{% url 'request-filter' 'TRAVEL_BAG' %}">Travel Bag Carry Requests  </a>
+            </div>
+        </div>
+        
+        
+        {% if user.profile.type == 'requester'%}
+            <article class="media-content-section">
+                <div>
+                    {% render_table requests%}
+                </div>                
+            </article>
+            
+        {% endif %}
+    {% else %}
+        <h2>Please Login to view Rides/Requests</h2>
+    {% endif %}
+{% endblock content %}
+
+
+

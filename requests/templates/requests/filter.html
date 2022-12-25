@@ -1,0 +1,37 @@
+{% extends 'users/base.html' %}
+{% load render_table from django_tables2%}
+{% block content %}
+    
+    {% if user.is_authenticated %}
+        {% if user.profile.type == 'requester'%}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filters
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if status %}            
+                        <a class="dropdown-item" href="{% url 'request-filter-adv' initial 'LAPTOP' %}">Laptop Carry Requests  </a>
+                        <a class="dropdown-item" href="{% url 'request-filter-adv' initial 'PACKAGE' %}">Package Carry Requests  </a>
+                        <a class="dropdown-item" href="{% url 'request-filter-adv' initial 'TRAVEL_BAG' %}">Travel Bag Carry Requests  </a>
+                    {% else %} 
+                        <a class="dropdown-item" href="{% url 'request-filter-adv' initial 'EXPIRED' %}">Expired Requests  </a>
+                        <a class="dropdown-item" href="{% url 'request-filter-adv' initial 'PENDING' %}">Pending Requests  </a>
+                    {% endif%}
+                </div>
+          </div>
+            
+            
+            <article class="media-content-section">
+                <div>
+                    {% render_table table %}
+                </div>                
+            </article>
+
+            
+        
+        {% endif %}
+    {% else %}
+        <h2>Please Login to view Rides/Requests</h2>
+    {% endif %}
+{% endblock content %}
+
