@@ -144,7 +144,7 @@ def AssetCreateView(request,*args,**kwargs):
     else:
         form=AssetCreateForm()
         
-    return render(request,'users/assetrequest_form.html',{'form':form})
+    return render(request,'requests/assetrequest_form.html',{'form':form})
 
 
 

@@ -75,3 +75,5 @@ def profile(request):
         'p_form':profile_form}
     
     return render(request,'users/profile.html',context)
+
+
